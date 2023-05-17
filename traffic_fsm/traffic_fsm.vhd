@@ -58,10 +58,9 @@ begin
         lg <= '1';
     end if;
     when others=> 
-    lr <= '0';
-    ly <= '0';
-    lg <= '0';
-
+        lr <= '0';
+        ly <= '0';
+        lg <= '0';
 end case;
 end process;
 end architecture;
