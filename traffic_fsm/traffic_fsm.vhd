@@ -2,18 +2,34 @@
 
 library ieee;
 use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
 entity traffic is
     port (
-        t, clk, nReset : in std_logic;
+        nReset,  clk : in std_logic;
         lr, ly, lg : out std_logic);
 end traffic;
 
 architecture traffic_arch of traffic is
     type state_type is (sr, sy, sg);
     signal current_state, next_state : state_type;
+    signal cnt_int: integer:=0;
+    signal t: std_logic:='0';
 begin
-
+    time_proc: process(cnt_int, clk) is
+        begin
+            if(clk'event and clk = '1')then
+                if(cnt_int=0 or cnt_int=5 or cnt_int=10)then 
+                        t<='1';
+                        else
+                        t<='0';
+                    end if;
+                    cnt_int<= cnt_int+1;
+                    if(cnt_int=16)then
+                        cnt_int<=0;
+                    end if;
+                end if;
+        end process;
     next_state_proc : process (current_state, t) is
     begin
         case(current_state) is

@@ -5,6 +5,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
+
 entity sq_detector is
 port(err: out std_logic;
     din,clk,nReset :in std_logic);
